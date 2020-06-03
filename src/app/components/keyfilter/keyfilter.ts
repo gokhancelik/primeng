@@ -18,7 +18,8 @@ const DEFAULT_MASKS = {
     hex: /[0-9a-f]/i,
     email: /[a-z0-9_\.\-@]/i,
     alpha: /[a-z_]/i,
-    alphanum: /[a-z0-9_]/i
+    alphanum: /[a-z0-9_]/i,
+    letter: /\p{L}/
 };
 
 const KEYS = {
@@ -82,7 +83,7 @@ export class KeyFilter implements Validator {
     isSpecialKey(e: KeyboardEvent) {
         let k = e.keyCode || e.charCode;
 
-        return k == 9 || k == 13 || k == 27 || k == 16 || k == 17 ||(k >= 18 && k <= 20) ||
+        return k == 9 || k == 13 || k == 27 || k == 16 || k == 17 || (k >= 18 && k <= 20) ||
             (DomHandler.getBrowser().opera && !e.shiftKey && (k == 8 || (k >= 33 && k <= 35) || (k >= 36 && k <= 39) || (k >= 44 && k <= 45)));
     }
 
